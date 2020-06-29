@@ -1,8 +1,17 @@
 import React from "react";
 import ListOfTraits from "./ListofTraits";
+import AbilityPokemon from "./AbilityPokemon";
 
 class SearchForm extends React.Component {
-	state = { pokemon: " ", pokechar: [], Type: "Pokemon" };
+	view = " ";
+	state = {
+		search: " ",
+		searchData: [],
+		Type: "pokemon",
+		isLoading: false,
+		error: null,
+		view: null,
+	};
 
 	handleChange = (e) => {
 		this.setState({
@@ -12,34 +21,48 @@ class SearchForm extends React.Component {
 
 	handleSubmit = async (e) => {
 		e.preventDefault();
-		const response = await fetch(
-			`https://pokeapi.co/api/v2/${this.state.Type}/${this.state.pokemon}/`
-		);
-		console.log(response);
+		this.setState({ isLoading: true });
+		let search = this.state.search.toLowerCase().split(" ").join("");
+		await fetch(`https://pokeapi.co/api/v2/${this.state.Type}/${search}/`)
+			.then((response) => {
+				if (response.ok) {
+					return response.json();
+				} else {
+					throw new Error("Something went wrong ...");
+				}
+			})
+			.then((data) => this.TypeofSearch(data))
+			.then((data) => this.setState({ searchData: data, isLoading: false }))
+			.catch((error) => this.setState({ error, isLoading: false }));
+	};
 
-		const data = await response.json();
-		this.setState({
-			pokechar: data,
-		});
+	TypeofSearch = (e) => {
+		this.view = this.state.Type;
+		if (this.view === "pokemon") {
+			this.view = <ListOfTraits traits={e} />;
+		} else {
+			this.view = <AbilityPokemon traits={e} />;
+		}
+		return this.view;
 	};
 
 	render() {
-		let view;
-		if (this.state.Type === "pokemon") {
-			view = <ListOfTraits traits={this.state.pokechar} />;
-		} else {
-			view = <ListOfTraits traits={this.state.pokechar} />;
+		const { isLoading, error } = this.state;
+		if (isLoading) {
+			return <p>Loading ...</p>;
 		}
-
+		if (error) {
+			return <p>{error.message}</p>;
+		}
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
 					<label>
 						<input
 							type="text"
-							value={this.state.pokemon}
+							value={this.state.search}
 							onChange={this.handleChange}
-							name="pokemon"
+							name="search"
 						/>
 					</label>
 					<select
@@ -52,7 +75,7 @@ class SearchForm extends React.Component {
 					</select>
 					<input type="submit" value="Submit" />
 				</form>
-				{view}
+				{this.view}
 			</div>
 		);
 	}
