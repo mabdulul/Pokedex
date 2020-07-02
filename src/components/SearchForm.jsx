@@ -39,7 +39,7 @@ class SearchForm extends React.Component {
 				.catch((error) => this.setState({ error, isLoading: false }));
 		} else {
 			let search = this.state.search.toLowerCase().split(" ").join("");
-			await fetch(`https://pokeapi.glitch.me/v1/pokemon/${search}/`)
+			await fetch(`${search}/`)
 				.then((response) => {
 					if (response.ok) {
 						return response.json();
