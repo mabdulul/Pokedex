@@ -11,6 +11,7 @@ class SearchForm extends React.Component {
 		isLoading: false,
 		error: null,
 		view: null,
+		anError: null,
 	};
 
 	handleChange = (e) => {
@@ -22,38 +23,50 @@ class SearchForm extends React.Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		this.setState({ isLoading: true });
-		let search = this.state.search.toLowerCase().split(" ").join("");
-		await fetch(`https://pokeapi.co/api/v2/${this.state.Type}/${search}/`)
-			.then((response) => {
-				if (response.ok) {
-					return response.json();
-				} else {
-					throw new Error("Something went wrong ...");
-				}
-			})
-			.then((data) => this.TypeofSearch(data))
-			.then((data) => this.setState({ searchData: data, isLoading: false }))
-			.catch((error) => this.setState({ error, isLoading: false }));
+
+		console.log(this.state.Type);
+
+		if (this.state.Type === "ability") {
+			let search = this.state.search.toLowerCase().split(" ").join("");
+			await fetch(`https://pokeapi.co/api/v2/${this.state.Type}/${search}/`)
+				.then((response) => {
+					if (response.ok) {
+						return response.json();
+					}
+				})
+				.then((data) => this.TypeofSearch(data))
+				.then((data) => this.setState({ searchData: data, isLoading: false }))
+				.catch((error) => this.setState({ error, isLoading: false }));
+		} else {
+			let search = this.state.search.toLowerCase().split(" ").join("");
+			await fetch(`https://pokeapi.glitch.me/v1/pokemon/${search}/`)
+				.then((response) => {
+					if (response.ok) {
+						return response.json();
+					}
+				})
+				.then((data) => this.TypeofSearch(data))
+				.then((data) => this.setState({ searchData: data, isLoading: false }))
+				.catch((error) => this.setState({ error, isLoading: false }));
+		}
 	};
 
 	TypeofSearch = (e) => {
 		this.view = this.state.Type;
-		if (this.view === "pokemon") {
-			this.view = <ListOfTraits traits={e} />;
+		if (e) {
+			if (this.view === "pokemon") {
+				this.view = <ListOfTraits traits={e} />;
+			} else {
+				this.view = <AbilityPokemon traits={e} />;
+			}
 		} else {
-			this.view = <AbilityPokemon traits={e} />;
+			this.view = <h1>Try another search cirtira </h1>;
 		}
-		return this.view;
 	};
 
 	render() {
 		const { isLoading, error } = this.state;
-		if (isLoading) {
-			return <p>Loading ...</p>;
-		}
-		if (error) {
-			return <p>{error.message}</p>;
-		}
+
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
@@ -75,7 +88,13 @@ class SearchForm extends React.Component {
 					</select>
 					<input type="submit" value="Submit" />
 				</form>
-				{this.view}
+				{isLoading ? (
+					<h5>it id loading dkd</h5>
+				) : error ? (
+					<div>{error.message}</div>
+				) : (
+					<div>{this.view}</div>
+				)}
 			</div>
 		);
 	}
