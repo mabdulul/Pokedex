@@ -25,30 +25,25 @@ class SearchForm extends React.Component {
 		this.setState({ isLoading: true });
 
 		console.log(this.state.Type);
+		let search = this.state.search.toLowerCase().split(" ").join("");
 
 		if (this.state.Type === "ability") {
-			let search = this.state.search.toLowerCase().split(" ").join("");
-			await fetch(`https://pokeapi.co/api/v2/${this.state.Type}/${search}/`)
-				.then((response) => {
-					if (response.ok) {
-						return response.json();
-					}
-				})
-				.then((data) => this.TypeofSearch(data))
-				.then((data) => this.setState({ searchData: data, isLoading: false }))
-				.catch((error) => this.setState({ error, isLoading: false }));
+			this.getData(`https://pokeapi.co/api/v2/${this.state.Type}/${search}/`);
 		} else {
-			let search = this.state.search.toLowerCase().split(" ").join("");
-			await fetch(`${search}/`)
-				.then((response) => {
-					if (response.ok) {
-						return response.json();
-					}
-				})
-				.then((data) => this.TypeofSearch(data))
-				.then((data) => this.setState({ searchData: data, isLoading: false }))
-				.catch((error) => this.setState({ error, isLoading: false }));
+			this.getData(`${search}/`);
 		}
+	};
+
+	getData = async (url) => {
+		await fetch(url)
+			.then((response) => {
+				if (response.ok) {
+					return response.json();
+				}
+			})
+			.then((data) => this.TypeofSearch(data))
+			.then((data) => this.setState({ searchData: data, isLoading: false }))
+			.catch((error) => this.setState({ error, isLoading: false }));
 	};
 
 	TypeofSearch = (e) => {
