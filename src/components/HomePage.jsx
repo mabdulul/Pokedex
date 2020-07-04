@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { loadData } from "./utils";
+import ColorThief from "colorthief";
 
 class HomePage extends Component {
 	state = {
@@ -24,9 +25,27 @@ class HomePage extends Component {
 			});
 		}
 	}
+	// componentWillMount(e) {
+	// 	const colorThief = new ColorThief();
+	// 	console.log(e.target.value);
+	// }
+
+	thisImage = (e) => {
+		console.log(e);
+		const colorThief = new ColorThief();
+
+		const img = e;
+		colorThief
+			.getColor(img)
+			.then((color) => {
+				console.log(color);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 	render() {
 		const { pokemon } = this.state;
-		console.log("pokemon", pokemon);
 
 		return (
 			<>
@@ -35,7 +54,11 @@ class HomePage extends Component {
 						drilldown.map((traits) => (
 							<div>
 								{traits.name} {traits.types}
-								<img src={traits.sprite} alt={traits.name} />
+								<img
+									src={traits.sprite}
+									alt={traits.name}
+									ref={() => this.thisImage(traits.sprite)}
+								/>
 							</div>
 						))
 					)}
