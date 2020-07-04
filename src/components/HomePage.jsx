@@ -4,42 +4,37 @@ import { loadData } from "./utils";
 class HomePage extends Component {
 	state = {
 		PokeOne: [],
-		PokeTwo: [],
-		PokeThree: [],
 	};
 	getRandomInt = () => {
 		let num = Math.floor(Math.random() * Math.floor(100));
 		return num;
 	};
 	async componentDidMount() {
-		const dataOne = await loadData(`${this.getRandomInt()}`);
-		const dataTwo = await loadData(`${this.getRandomInt()}`);
-		const dataThree = await loadData(`${this.getRandomInt()}`);
-
-		this.setState({
-			PokeOne: dataOne,
-			PokeTwo: dataTwo,
-			PokeThree: dataThree,
-		});
-
-		if (this.state.PokeOne.length > 1) {
-			const amtdelte = this.state.PokeOne.length - 1;
-			const newArray = this.state.PokeOne.splice(0, amtdelte);
-			console.log("here", newArray);
+		const pokeholder = [];
+		for (let i = 0; i < 3; i++) {
+			let test = await loadData(`${this.getRandomInt()}`);
+			if (test.length > 1) {
+				console.log("test lenght", test.length);
+				let test2 = test.splice(1, 1);
+				pokeholder.push(test2);
+			} else {
+				pokeholder.push(test);
+			}
+			this.setState({
+				PokeOne: pokeholder,
+			});
 		}
 	}
 	render() {
-		const { PokeOne, PokeTwo, PokeThree } = this.state;
+		const { PokeOne } = this.state;
+		console.log("PokeOne", PokeOne);
 
 		return (
 			<>
 				<div>
-					{PokeOne.map((traits) => (
-						<li key={traits.name}>
-							<h3>{traits.number}</h3>
-							<h3>{traits.name}</h3>
-						</li>
-					))}
+					{PokeOne.map((traits) =>
+						traits.map((test) => <div>{test.name}</div>)
+					)}
 				</div>
 			</>
 		);
