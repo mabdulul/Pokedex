@@ -3,7 +3,7 @@ import { loadData } from "./utils";
 
 class HomePage extends Component {
 	state = {
-		PokeOne: [],
+		pokemon: [],
 	};
 	getRandomInt = () => {
 		let num = Math.floor(Math.random() * Math.floor(100));
@@ -12,28 +12,32 @@ class HomePage extends Component {
 	async componentDidMount() {
 		const pokeholder = [];
 		for (let i = 0; i < 3; i++) {
-			let test = await loadData(`${this.getRandomInt()}`);
-			if (test.length > 1) {
-				console.log("test lenght", test.length);
-				let test2 = test.splice(1, 1);
-				pokeholder.push(test2);
+			let getData = await loadData(`${this.getRandomInt()}`);
+			if (getData.length > 1) {
+				let getDataOne = getData.splice(1, 1);
+				pokeholder.push(getDataOne);
 			} else {
-				pokeholder.push(test);
+				pokeholder.push(getData);
 			}
 			this.setState({
-				PokeOne: pokeholder,
+				pokemon: pokeholder,
 			});
 		}
 	}
 	render() {
-		const { PokeOne } = this.state;
-		console.log("PokeOne", PokeOne);
+		const { pokemon } = this.state;
+		console.log("pokemon", pokemon);
 
 		return (
 			<>
 				<div>
-					{PokeOne.map((traits) =>
-						traits.map((test) => <div>{test.name}</div>)
+					{pokemon.map((drilldown) =>
+						drilldown.map((traits) => (
+							<div>
+								{traits.name} {traits.types}
+								<img src={traits.sprite} alt={traits.name} />
+							</div>
+						))
 					)}
 				</div>
 			</>
