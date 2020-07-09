@@ -1,0 +1,17 @@
+.HomePage {
+    margin-bottom: 90px;
+}
+
+
+.homepage_header {
+    width: max-content;
+}
+
+.homepage_header_hr {
+    border: 1px solid #000000
+}
+
+.homepageH2 {
+    text-transform: uppercase;
+    float: left;
+}

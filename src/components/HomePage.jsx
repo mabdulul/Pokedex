@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { loadData } from "./utils";
 import { Palette } from "react-palette";
+import "./style.css";
 
 class HomePage extends Component {
 	state = {
@@ -31,21 +32,27 @@ class HomePage extends Component {
 
 		return (
 			<>
-				<div className="container-fluid">
-					<div className="row">
-						<div
-							className="col-sm-12 col-md-12 col-lg-12 d-flex"
-							style={{ justifyContent: "space-evenly" }}
-						>
+				<section>
+					<div className="container" style={{ marginTop: "5%" }}>
+						<div className="row HomePage">
+							<div className="col-md-12 homepage_header">
+								<div className="homepage_header">
+									<h3 className="homepageH2">Today's Pokemon</h3>
+									<br />
+									<hr className="homepage_header_hr" />
+								</div>
+							</div>
+						</div>
+						<div className="row">
 							{pokemon.map((drilldown) =>
 								drilldown.map((traits) => (
-									<div>
+									<div className="col-md-6 col-lg-4">
 										<Palette src={traits.sprite}>
 											{({ data, loading, error }) => (
 												<div
 													style={{
-														width: "250px",
-														height: "230px",
+														width: "290px",
+														height: "275px",
 														backgroundImage: `linear-gradient(to right top, ${data.vibrant}, ${data.lightVibrant})`,
 														borderRadius: "13%",
 														display: "grid",
@@ -60,7 +67,7 @@ class HomePage extends Component {
 															src={traits.sprite}
 															alt={traits.name}
 															className="img-responsive"
-															width="150px"
+															width="195px"
 														/>
 													</div>
 
@@ -83,7 +90,7 @@ class HomePage extends Component {
 							)}
 						</div>
 					</div>
-				</div>
+				</section>
 			</>
 		);
 	}
