@@ -63,8 +63,8 @@ class SearchForm extends React.Component {
 		const { isLoading, error } = this.state;
 
 		return (
-			<div>
-				<form onSubmit={this.handleSubmit}>
+			<div className="form-inline">
+				<form onSubmit={this.handleSubmit} className="form-inline">
 					<label>
 						<input
 							type="text"
