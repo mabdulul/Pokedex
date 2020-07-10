@@ -1,12 +1,13 @@
 import React from "react";
 import logo from "./logo.svg";
 import SearchForm from "./SearchForm";
-
+import sidelogo from "../Logo2.svg";
 const Nav = (props) => {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light">
 			<a className="navbar-brand" href="#">
-				<img src={logo} alt="logo" width="130px" />
+				<img src={sidelogo} alt="logo" width="50px" />
+				<img src={logo} alt="logo" width="120px" />
 			</a>
 			<button
 				className="navbar-toggler"

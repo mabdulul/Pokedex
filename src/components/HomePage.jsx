@@ -46,7 +46,7 @@ class HomePage extends Component {
 						<div className="row">
 							{pokemon.map((drilldown) =>
 								drilldown.map((traits) => (
-									<div className="col-md-6 col-lg-4">
+									<div className="col-md-4 col-lg-4">
 										<Palette src={traits.sprite}>
 											{({ data, loading, error }) => (
 												<div

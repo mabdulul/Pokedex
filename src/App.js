@@ -9,7 +9,6 @@ function App() {
 		<div
 			className="App"
 			style={{
-				backgroundImage: `url(${bg})`,
 				backgroundSize: "cover",
 			}}
 		>
