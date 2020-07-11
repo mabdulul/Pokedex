@@ -1,17 +1,36 @@
 .HomePage {
-    margin-bottom: 90px;
+	margin-bottom: 90px;
 }
 
+.nav-border {
+	color: black;
+	margin-left: 35px;
+	padding: 2px 5px;
+}
 
+/* Over writing bootstrap with  */
+.navbar-light .navbar-nav .nav-link {
+	color: black;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+	color: black;
+}
+.nav-border:hover {
+	border: 1px solid black;
+	border-radius: 5px;
+	color: black;
+}
+/* Over writing bootstrap with  */
 .homepage_header {
-    width: max-content;
+	width: max-content;
 }
 
 .homepage_header_hr {
-    border: 1px solid #000000
+	border: 1px solid #000000;
 }
 
 .homepageH2 {
-    text-transform: uppercase;
-    float: left;
+	text-transform: uppercase;
+	float: left;
 }
