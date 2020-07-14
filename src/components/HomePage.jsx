@@ -29,6 +29,7 @@ class HomePage extends Component {
 
 	render() {
 		const { pokemon } = this.state;
+		console.log(pokemon);
 
 		return (
 			<>
@@ -46,17 +47,13 @@ class HomePage extends Component {
 						<div className="row">
 							{pokemon.map((drilldown) =>
 								drilldown.map((traits) => (
-									<div className="col-md-4 col-lg-4">
+									<div className="col-sm-4 col-md-4 col-lg-4 homepage_topThree">
 										<Palette src={traits.sprite}>
 											{({ data, loading, error }) => (
 												<div
+													className="Homepage_Pokemon"
 													style={{
-														width: "290px",
-														height: "275px",
 														backgroundImage: `linear-gradient(to right top, ${data.vibrant}, ${data.lightVibrant})`,
-														borderRadius: "13%",
-														display: "grid",
-														justifyContent: "center",
 													}}
 												>
 													<div
@@ -72,14 +69,20 @@ class HomePage extends Component {
 													</div>
 
 													<div>
-														<h3 style={{ color: "white" }}>{traits.name} </h3>
+														<h4 style={{ color: "white" }}>{traits.name} </h4>
 														<p
 															style={{
 																textTransform: "uppercase",
-																fontSize: "13px",
+																fontSize: "11px",
 															}}
 														>
-															{traits.types}
+															<div className="TypeOfPokeBox">
+																{traits.types.map((type) => (
+																	<div className="TypeOfPoke">
+																		<span className={type}>{type}</span>
+																	</div>
+																))}
+															</div>
 														</p>
 													</div>
 												</div>

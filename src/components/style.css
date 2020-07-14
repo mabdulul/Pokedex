@@ -6,6 +6,7 @@
 	color: black;
 	margin-left: 35px;
 	padding: 2px 5px;
+	width: fit-content;
 }
 
 /* Over writing bootstrap with  */
@@ -21,6 +22,9 @@
 	border-radius: 5px;
 	color: black;
 }
+.navbar_Pok:focus {
+	outline: none;
+}
 /* Over writing bootstrap with  */
 .homepage_header {
 	width: max-content;
@@ -33,4 +37,144 @@
 .homepageH2 {
 	text-transform: uppercase;
 	float: left;
+}
+
+/***** Search Box **********************/
+.searchBox_form {
+	position: relative;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	border: none;
+	background-color: #f6f6f6;
+
+	border-radius: 10px;
+}
+.searchBox label {
+	order: 2;
+}
+.searchBox input {
+	border: none;
+	background-color: #f6f6f6;
+}
+
+.searchBox_btn {
+	border: none;
+	background-color: transparent;
+}
+.searchBox {
+	margin-right: 20px;
+}
+
+/**************Types*******************/
+.TypeOfPokeBox {
+	display: flex;
+}
+.TypeOfPoke {
+	color: whitesmoke;
+	font-weight: 500;
+	display: flex;
+	margin-right: 5px;
+}
+.TypeOfPoke span {
+	padding: 5px;
+	border-radius: 8px;
+}
+.Normal {
+	color: black;
+	background-color: white;
+}
+.Fairy {
+	background-color: #ffa9c5;
+}
+.Fighting {
+	background-color: #acadaf;
+}
+
+.Flying {
+	color: black;
+	background-color: honeydew;
+}
+.Poison {
+	background-color: #d36059;
+}
+.Ground {
+	background-color: darkgreen;
+}
+.Rock {
+	background-color: darkred;
+}
+.Bug {
+	background-color: darkslategray;
+}
+.Ghost {
+	background-color: rgba(255, 250, 240, 0.452);
+}
+.Steel {
+	background-color: gray;
+}
+.Fire {
+	background-color: #f2653f;
+}
+.Grass {
+	background-color: rgb(6, 155, 105);
+}
+.Water {
+	background-color: rgb(73, 182, 245);
+}
+.Electric {
+	background-color: rgb(228, 154, 17);
+}
+.Psychic {
+	background-color: rgb(224, 95, 207);
+}
+.Ice {
+	color: black;
+	background-color: snow;
+}
+.Dragon {
+	background-color: #596c85;
+}
+
+.Dark {
+	color: white;
+	background-color: rgb(51, 4, 41);
+}
+/**************** Media Queries ********************************/
+.Homepage_Pokemon {
+	width: 290px;
+	height: 275px;
+	border-radius: 13%;
+	display: grid;
+	justify-content: center;
+}
+@media (max-width: 767.98px) {
+	.homepage_topThree {
+		margin-bottom: 50px;
+	}
+	.HomePage {
+		margin-bottom: 20px;
+		display: flex;
+		justify-content: center;
+	}
+	.Homepage_Pokemon {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.navbar_Pokedex {
+		background-color: transparent;
+		border: none;
+		outline: none;
+		margin-right: auto !important;
+	}
+	.nav-border {
+		font-size: 1.5rem;
+	}
+	.searchBox_form {
+		justify-content: start;
+	}
+	.searchBox label {
+		width: 85%;
+	}
 }

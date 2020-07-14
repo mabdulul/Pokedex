@@ -1,6 +1,8 @@
 import React from "react";
 import ListOfTraits from "./ListofTraits";
-import AbilityPokemon from "./AbilityPokemon";
+import search from "./icon.svg";
+import history from "./history";
+import "./style.css";
 
 class SearchForm extends React.Component {
 	view = " ";
@@ -23,15 +25,9 @@ class SearchForm extends React.Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		this.setState({ isLoading: true });
-
 		console.log(this.state.Type);
 		let search = this.state.search.toLowerCase().split(" ").join("");
-
-		if (this.state.Type === "ability") {
-			this.getData(`https://pokeapi.co/api/v2/${this.state.Type}/${search}/`);
-		} else {
-			this.getData(`${search}/`);
-		}
+		this.getData(`${search}/`);
 	};
 
 	getData = async (url) => {
@@ -49,11 +45,8 @@ class SearchForm extends React.Component {
 	TypeofSearch = (e) => {
 		this.view = this.state.Type;
 		if (e) {
-			if (this.view === "pokemon") {
-				this.view = <ListOfTraits traits={e} />;
-			} else {
-				this.view = <AbilityPokemon traits={e} />;
-			}
+			this.view = <ListOfTraits traits={e} />;
+			history.push("/ListOfTraits");
 		} else {
 			this.view = <h1>Try another search cirtira </h1>;
 		}
@@ -63,25 +56,24 @@ class SearchForm extends React.Component {
 		const { isLoading, error } = this.state;
 
 		return (
-			<div className="form-inline">
-				<form onSubmit={this.handleSubmit} className="form-inline">
-					<label>
+			<>
+				<form
+					onSubmit={this.handleSubmit}
+					className="form-inline  my-2 my-lg-0 searchBox_form searchBox"
+				>
+					<label className="searchBox_label">
 						<input
+							className="form-control search_label mr-sm-2  search_input"
 							type="text"
 							value={this.state.search}
 							onChange={this.handleChange}
 							name="search"
+							placeHolder="Search for a Pokémon"
 						/>
 					</label>
-					<select
-						value={this.state.searchType}
-						onChange={this.handleChange}
-						name="Type"
-					>
-						<option value="pokemon">Pokemon</option>
-						<option value="ability">Abilities</option>
-					</select>
-					<input type="submit" value="Submit" />
+					<button type="submit" value="Submit" className="searchBox_btn">
+						<img src={search} alt="search" width="20px" />
+					</button>
 				</form>
 				{isLoading ? (
 					<h5>it id loading dkd</h5>
@@ -90,7 +82,7 @@ class SearchForm extends React.Component {
 				) : (
 					<div>{this.view}</div>
 				)}
-			</div>
+			</>
 		);
 	}
 }
