@@ -4,13 +4,12 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import history from "../src/components/history";
 import { Router } from "react-router-dom";
+import history from "./components/history";
+
 ReactDOM.render(
 	<Router history={history}>
-		<React.StrictMode>
-			<App />
-		</React.StrictMode>
+		<App />
 	</Router>,
 	document.getElementById("root")
 );

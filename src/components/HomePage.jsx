@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { loadData } from "./utils";
 import { Palette } from "react-palette";
 import "./style.css";
+import { v4 as uuidv4 } from "uuid";
 
 class HomePage extends Component {
 	state = {
 		pokemon: [],
+		uniqueId: uuidv4(),
 	};
 	getRandomInt = () => {
 		let num = Math.floor(Math.random() * Math.floor(800));
@@ -29,6 +31,7 @@ class HomePage extends Component {
 
 	render() {
 		const { pokemon } = this.state;
+		const { uniqueId } = this.state;
 		console.log(pokemon);
 
 		return (
@@ -47,8 +50,8 @@ class HomePage extends Component {
 						<div className="row">
 							{pokemon.map((drilldown) =>
 								drilldown.map((traits) => (
-									<div className="col-sm-4 col-md-4 col-lg-4 homepage_topThree">
-										<Palette src={traits.sprite}>
+									<div className="col-sm-12 col-md-11 col-lg-4 homepage_topThree">
+										<Palette src={traits.sprite} key={traits.number}>
 											{({ data, loading, error }) => (
 												<div
 													className="Homepage_Pokemon"
@@ -70,7 +73,7 @@ class HomePage extends Component {
 
 													<div>
 														<h4 style={{ color: "white" }}>{traits.name} </h4>
-														<p
+														<div
 															style={{
 																textTransform: "uppercase",
 																fontSize: "11px",
@@ -83,7 +86,7 @@ class HomePage extends Component {
 																	</div>
 																))}
 															</div>
-														</p>
+														</div>
 													</div>
 												</div>
 											)}

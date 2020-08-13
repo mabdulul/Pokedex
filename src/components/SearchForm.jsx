@@ -1,5 +1,5 @@
 import React from "react";
-import ListOfTraits from "./ListofTraits";
+
 import search from "./icon.svg";
 import history from "./history";
 import "./style.css";
@@ -23,6 +23,7 @@ class SearchForm extends React.Component {
 	};
 
 	handleSubmit = async (e) => {
+		console.log(history);
 		e.preventDefault();
 		this.setState({ isLoading: true });
 		console.log(this.state.Type);
@@ -37,24 +38,13 @@ class SearchForm extends React.Component {
 					return response.json();
 				}
 			})
-			.then((data) => this.TypeofSearch(data))
+			.then((data) => history.push("/list", { data }))
+
 			.then((data) => this.setState({ searchData: data, isLoading: false }))
 			.catch((error) => this.setState({ error, isLoading: false }));
 	};
 
-	TypeofSearch = (e) => {
-		this.view = this.state.Type;
-		if (e) {
-			this.view = <ListOfTraits traits={e} />;
-			history.push("/ListOfTraits");
-		} else {
-			this.view = <h1>Try another search cirtira </h1>;
-		}
-	};
-
 	render() {
-		const { isLoading, error } = this.state;
-
 		return (
 			<>
 				<form
@@ -68,20 +58,13 @@ class SearchForm extends React.Component {
 							value={this.state.search}
 							onChange={this.handleChange}
 							name="search"
-							placeHolder="Search for a Pokémon"
+							placeholder="Search for a Pokémon"
 						/>
 					</label>
 					<button type="submit" value="Submit" className="searchBox_btn">
 						<img src={search} alt="search" width="20px" />
 					</button>
 				</form>
-				{isLoading ? (
-					<h5>it id loading dkd</h5>
-				) : error ? (
-					<div>{error.message}</div>
-				) : (
-					<div>{this.view}</div>
-				)}
 			</>
 		);
 	}

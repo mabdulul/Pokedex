@@ -1,6 +1,5 @@
 import React from "react";
 
-import HomePage from "./components/HomePage";
 import Nav from "./components/Nav";
 
 import "./App.css";
@@ -13,8 +12,6 @@ function App() {
 			}}
 		>
 			<Nav />
-
-			<HomePage />
 		</div>
 	);
 }

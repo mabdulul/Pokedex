@@ -1,8 +1,14 @@
 import React from "react";
 
-const AbilityPokemon = (props) => {
-	console.log(props.traits);
-	return <h1>Ability here</h1>;
-};
+class Test extends React.Component {
+	state = {};
+	render() {
+		return (
+			<>
+				<h1>Gellodsfjkcjvlx cvcjlvjz cxjkvhz vcvjzk</h1>
+			</>
+		);
+	}
+}
 
-export default AbilityPokemon;
+export default Test;
