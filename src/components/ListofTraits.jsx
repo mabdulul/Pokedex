@@ -2,22 +2,36 @@ import React, { useEffect, useState } from "react";
 import history from "./history";
 
 const ListOfTraits = (props) => {
-	const [evoImages, setImages] = useState();
 	let data = props.location.state;
-	let maybe = props.location.state;
-	// useEffect(() => {
-	// 	const bla = maybe.data.map((ok) =>
-	// 		ok.family.evolutionLine.map((evo) => evo)
-	// 	);
-	// 	setImages(bla);
-	// }, [maybe]);
+	const [evoImages, setImages] = useState();
+	const [filterdata, setFilterdata] = useState([]);
 
-	console.log("I am right here", evoImages);
+	useEffect(() => {
+		fetchData();
+		async function fetchData() {
+			setFilterdata(data.data.splice(0, 1));
+			const getEvoImages = await data.data.map((ok) =>
+				ok.family.evolutionLine.map((evo) => evo)
+			);
+			console.log(getEvoImages);
+			getEvoImages.forEach((evo) =>
+				evo.forEach(function (item) {
+					fetch(`${item}/`)
+						.then((response) => {
+							if (response.ok) {
+								return response.json();
+							}
+						})
+						.then((data) => console.log(data));
+				})
+			);
+			await setImages(getEvoImages);
+		}
+	}, [data]);
 
 	if (!data.data) {
 		return <h1>The pokemon does not exist </h1>;
 	}
-	const onePoke = data.data.splice(0, 1);
 
 	const getLink = async (evo) => {
 		await fetch(`${evo}/`)
@@ -33,7 +47,7 @@ const ListOfTraits = (props) => {
 		<div className="container">
 			<div className="row">
 				<div className="col-md-12">
-					{onePoke.map((poke) => (
+					{filterdata.map((poke) => (
 						<div key={poke.number}>
 							<p>{poke.description}</p>
 							<img src={poke.sprite} alt={poke.name} width="500px" />
