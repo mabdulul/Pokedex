@@ -4,7 +4,7 @@ import SearchForm from "./SearchForm";
 import sidelogo from "../Logo2.svg";
 import "./style.css";
 import HomePage from "./HomePage";
-import ListOfTraits from "./listofTraits";
+import ListOfTraits from "./ListofTraits";
 import { Route, Link } from "react-router-dom";
 const Nav = (props) => {
 	return (

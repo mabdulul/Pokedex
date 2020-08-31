@@ -10,13 +10,13 @@ const ListOfTraits = (props) => {
 		return <h1>The pokemon does not exist </h1>;
 	}
 
-	const filterdata = data.data.splice(0, 1);
+	const filterData = data.data.splice(0, 1);
 
 	return (
 		<div className="container moveRight">
 			<div className="row">
 				<div className="col-md-12">
-					{filterdata.map((poke) => (
+					{filterData.map((poke) => (
 						<Palette src={poke.sprite} key={poke.number}>
 							{({ data, loading, error }) => (
 								<div

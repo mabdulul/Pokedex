@@ -59,7 +59,6 @@ class SearchForm extends React.Component {
 							value={this.state.search}
 							onChange={this.handleChange}
 							name="search"
-							placeholder="Search for a Pokémon"
 						/>
 					</label>
 					<button type="submit" value="Submit" className="searchBox_btn">
