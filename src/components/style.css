@@ -2,6 +2,31 @@
 	margin-bottom: 90px;
 }
 
+button,
+input[type="submit"],
+input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.HomePage_btn:hover {
+	border-bottom: 2px solid;
+}
+
+button:focus {
+	border: none;
+	outline: none;
+}
+
+body {
+	overflow-x: hidden;
+}
+
 .nav-border {
 	color: black;
 	margin-left: 35px;
@@ -17,14 +42,17 @@
 .navbar-light .navbar-nav .nav-link:hover {
 	color: black;
 }
+
 .nav-border:hover {
 	border: 1px solid black;
 	border-radius: 5px;
 	color: black;
 }
+
 .navbar_Pok:focus {
 	outline: none;
 }
+
 /* Over writing bootstrap with  */
 .homepage_header {
 	width: max-content;
@@ -50,9 +78,11 @@
 
 	border-radius: 10px;
 }
+
 .searchBox label {
 	order: 2;
 }
+
 .searchBox input {
 	border: none;
 	background-color: #f6f6f6;
@@ -62,6 +92,7 @@
 	border: none;
 	background-color: transparent;
 }
+
 .searchBox {
 	margin-right: 20px;
 }
@@ -69,24 +100,37 @@
 /**************Types*******************/
 .TypeOfPokeBox {
 	display: flex;
+	text-align: left;
+	text-transform: uppercase;
+	font-size: 11px;
 }
+
+.PokeNameHome {
+	text-align: left;
+	color: white;
+}
+
 .TypeOfPoke {
 	color: whitesmoke;
 	font-weight: 500;
 	display: flex;
 	margin-right: 5px;
 }
+
 .TypeOfPoke span {
 	padding: 5px;
 	border-radius: 8px;
 }
+
 .Normal {
 	color: black;
 	background-color: white;
 }
+
 .Fairy {
 	background-color: #ffa9c5;
 }
+
 .Fighting {
 	background-color: #acadaf;
 }
@@ -95,43 +139,56 @@
 	color: black;
 	background-color: honeydew;
 }
+
 .Poison {
 	background-color: #d36059;
 }
+
 .Ground {
 	background-color: darkgreen;
 }
+
 .Rock {
 	background-color: darkred;
 }
+
 .Bug {
 	background-color: darkslategray;
 }
+
 .Ghost {
 	background-color: rgba(255, 250, 240, 0.452);
 }
+
 .Steel {
 	background-color: gray;
 }
+
 .Fire {
 	background-color: #f2653f;
 }
+
 .Grass {
 	background-color: rgb(6, 155, 105);
 }
+
 .Water {
 	background-color: rgb(73, 182, 245);
 }
+
 .Electric {
 	background-color: rgb(228, 154, 17);
 }
+
 .Psychic {
 	background-color: rgb(224, 95, 207);
 }
+
 .Ice {
 	color: black;
 	background-color: snow;
 }
+
 .Dragon {
 	background-color: #596c85;
 }
@@ -140,6 +197,91 @@
 	color: white;
 	background-color: rgb(51, 4, 41);
 }
+
+/***************************************************************/
+.moveRight {
+	margin-right: -5px;
+	padding-right: 0px;
+}
+
+.PokeName,
+.Poke_Looks {
+	color: white;
+}
+
+.PokeName {
+	font-size: 4rem;
+	text-transform: uppercase;
+}
+
+.PokeHolder {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	grid-gap: 20px;
+	margin-top: 40px;
+	padding-right: 30px;
+	padding-left: 30px;
+	padding-bottom: 40px;
+	border-top-left-radius: 100px;
+}
+
+.Poke_Looks_traits {
+	font-weight: 600;
+}
+
+.Pokefix {
+	display: block;
+}
+
+.PokeHolder-row {
+	display: grid;
+	/* grid-template-rows: 80px 40px 80px 70px; */
+	grid-template-rows: 80px 40px 95px 80px;
+	margin-top: 10%;
+	padding-right: 20px;
+}
+
+.PokeHolder-row div ul {
+	list-style-type: none;
+	display: inline-flex;
+	justify-content: space-evenly;
+	padding-inline-start: 0px;
+}
+
+.Poke_Looks li:first-child {
+	padding: 10px 10px 10px 0px;
+}
+
+.Poke_Looks {
+	display: flex;
+	text-align: center;
+	border: solid 1px white;
+	border-radius: 18px;
+	justify-content: center;
+}
+
+.Poke_Looks li {
+	padding: 10px 10px;
+}
+
+.Poke_Looks_title {
+	font-weight: 200;
+}
+
+.Poke_btn button:first-child {
+	margin-left: 0px;
+}
+
+.Poke_btn {
+	margin-top: 10px;
+	color: white;
+}
+
+.Poke_btn button {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
 /**************** Media Queries ********************************/
 .Homepage_Pokemon {
 	width: 290px;
@@ -148,15 +290,20 @@
 	display: grid;
 	justify-content: center;
 }
+
 @media (max-width: 767.98px) {
 	.homepage_topThree {
 		margin-bottom: 50px;
+		display: flex;
+		justify-content: center;
 	}
+
 	.HomePage {
 		margin-bottom: 20px;
 		display: flex;
 		justify-content: center;
 	}
+
 	.Homepage_Pokemon {
 		margin-left: auto;
 		margin-right: auto;
@@ -168,12 +315,15 @@
 		outline: none;
 		margin-right: auto !important;
 	}
+
 	.nav-border {
 		font-size: 1.5rem;
 	}
+
 	.searchBox_form {
 		justify-content: start;
 	}
+
 	.searchBox label {
 		width: 85%;
 	}

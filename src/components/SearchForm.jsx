@@ -38,6 +38,7 @@ class SearchForm extends React.Component {
 					return response.json();
 				}
 			})
+
 			.then((data) => history.push("/list", { data }))
 
 			.then((data) => this.setState({ searchData: data, isLoading: false }))

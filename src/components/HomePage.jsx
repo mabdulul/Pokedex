@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { loadData } from "./utils";
 import { Palette } from "react-palette";
 import "./style.css";
-import { v4 as uuidv4 } from "uuid";
+
+import uuid from "react-uuid";
+import { getPokemon } from "./GetPokemon";
 
 class HomePage extends Component {
 	state = {
 		pokemon: [],
-		uniqueId: uuidv4(),
 	};
 	getRandomInt = () => {
 		let num = Math.floor(Math.random() * Math.floor(800));
@@ -31,8 +32,6 @@ class HomePage extends Component {
 
 	render() {
 		const { pokemon } = this.state;
-		const { uniqueId } = this.state;
-		console.log(pokemon);
 
 		return (
 			<>
@@ -50,45 +49,49 @@ class HomePage extends Component {
 						<div className="row">
 							{pokemon.map((drilldown) =>
 								drilldown.map((traits) => (
-									<div className="col-sm-12 col-md-11 col-lg-4 homepage_topThree">
-										<Palette src={traits.sprite} key={traits.number}>
+									<div
+										className="col-sm-12 col-md-11 col-lg-4 homepage_topThree"
+										key={uuid()}
+									>
+										<Palette src={traits.sprite}>
 											{({ data, loading, error }) => (
-												<div
-													className="Homepage_Pokemon"
-													style={{
-														backgroundImage: `linear-gradient(to right top, ${data.vibrant}, ${data.lightVibrant})`,
-													}}
+												<button
+													className="HomePage_btn"
+													onClick={() => getPokemon(traits.name)}
+													key={uuid()}
 												>
 													<div
-														className="imageUp"
-														style={{ position: "relative", bottom: "50px" }}
+														className="Homepage_Pokemon"
+														style={{
+															backgroundImage: `linear-gradient(to right top, ${data.vibrant}, ${data.lightVibrant})`,
+														}}
 													>
-														<img
-															src={traits.sprite}
-															alt={traits.name}
-															className="img-responsive"
-															width="195px"
-														/>
-													</div>
-
-													<div>
-														<h4 style={{ color: "white" }}>{traits.name} </h4>
 														<div
-															style={{
-																textTransform: "uppercase",
-																fontSize: "11px",
-															}}
+															className="imageUp"
+															style={{ position: "relative", bottom: "50px" }}
 														>
-															<div className="TypeOfPokeBox">
-																{traits.types.map((type) => (
-																	<div className="TypeOfPoke">
-																		<span className={type}>{type}</span>
-																	</div>
-																))}
+															<img
+																src={traits.sprite}
+																alt={traits.name}
+																className="img-responsive"
+																width="195px"
+															/>
+														</div>
+
+														<div>
+															<h4 className="PokeNameHome">{traits.name} </h4>
+															<div>
+																<div className="TypeOfPokeBox">
+																	{traits.types.map((type) => (
+																		<div className="TypeOfPoke">
+																			<span className={type}>{type}</span>
+																		</div>
+																	))}
+																</div>
 															</div>
 														</div>
 													</div>
-												</div>
+												</button>
 											)}
 										</Palette>
 									</div>
