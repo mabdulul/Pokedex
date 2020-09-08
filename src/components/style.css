@@ -108,6 +108,7 @@ body {
 .PokeNameHome {
 	text-align: left;
 	color: white;
+	text-transform: uppercase;
 }
 
 .TypeOfPoke {
@@ -122,78 +123,78 @@ body {
 	border-radius: 8px;
 }
 
-.Normal {
+.normal {
 	color: black;
 	background-color: white;
 }
 
-.Fairy {
+.fairy {
 	background-color: #ffa9c5;
 }
 
-.Fighting {
+.fighting {
 	background-color: #acadaf;
 }
 
-.Flying {
+.flying {
 	color: black;
 	background-color: honeydew;
 }
 
-.Poison {
+.poison {
 	background-color: #d36059;
 }
 
-.Ground {
+.ground {
 	background-color: darkgreen;
 }
 
-.Rock {
+.rock {
 	background-color: darkred;
 }
 
-.Bug {
+.bug {
 	background-color: darkslategray;
 }
 
-.Ghost {
+.ghost {
 	background-color: rgba(255, 250, 240, 0.452);
 }
 
-.Steel {
+.steel {
 	background-color: gray;
 }
 
-.Fire {
+.fire {
 	background-color: #f2653f;
 }
 
-.Grass {
+.grass {
 	background-color: rgb(6, 155, 105);
 }
 
-.Water {
+.water {
 	background-color: rgb(73, 182, 245);
 }
 
-.Electric {
+.electric {
 	background-color: rgb(228, 154, 17);
 }
 
-.Psychic {
+.psychic {
 	background-color: rgb(224, 95, 207);
 }
 
-.Ice {
+.ice {
 	color: black;
 	background-color: snow;
 }
 
-.Dragon {
+.dragon {
 	background-color: #596c85;
 }
 
-.Dark {
+.dark {
 	color: white;
 	background-color: rgb(51, 4, 41);
 }

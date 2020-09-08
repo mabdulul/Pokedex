@@ -32,6 +32,7 @@ class HomePage extends Component {
 
 	render() {
 		const { pokemon } = this.state;
+		console.log("here", pokemon);
 
 		return (
 			<>
@@ -47,56 +48,64 @@ class HomePage extends Component {
 							</div>
 						</div>
 						<div className="row">
-							{pokemon.map((drilldown) =>
-								drilldown.map((traits) => (
-									<div
-										className="col-sm-12 col-md-11 col-lg-4 homepage_topThree"
-										key={uuid()}
+							{pokemon.map((traits) => (
+								<div
+									className="col-sm-12 col-md-11 col-lg-4 homepage_topThree"
+									key={uuid()}
+								>
+									<Palette
+										src={
+											traits.sprites.other["official-artwork"]["front_default"]
+										}
 									>
-										<Palette src={traits.sprite}>
-											{({ data, loading, error }) => (
-												<button
-													className="HomePage_btn"
-													onClick={() => getPokemon(traits.name)}
-													key={uuid()}
+										{({ data, loading, error }) => (
+											<button
+												className="HomePage_btn"
+												onClick={() => getPokemon(traits.name)}
+												key={uuid()}
+											>
+												<div
+													className="Homepage_Pokemon"
+													style={{
+														backgroundImage: `linear-gradient(to right top, ${data.vibrant}, ${data.lightVibrant})`,
+													}}
 												>
 													<div
-														className="Homepage_Pokemon"
-														style={{
-															backgroundImage: `linear-gradient(to right top, ${data.vibrant}, ${data.lightVibrant})`,
-														}}
+														className="imageUp"
+														style={{ position: "relative", bottom: "50px" }}
 													>
-														<div
-															className="imageUp"
-															style={{ position: "relative", bottom: "50px" }}
-														>
-															<img
-																src={traits.sprite}
-																alt={traits.name}
-																className="img-responsive"
-																width="195px"
-															/>
-														</div>
+														<img
+															src={
+																traits.sprites.other["official-artwork"][
+																	"front_default"
+																]
+															}
+															alt={traits.name}
+															className="img-responsive"
+															width="195px"
+														/>
+													</div>
 
+													<div>
+														<h4 className="PokeNameHome">{traits.name}</h4>
 														<div>
-															<h4 className="PokeNameHome">{traits.name} </h4>
-															<div>
-																<div className="TypeOfPokeBox">
-																	{traits.types.map((type) => (
-																		<div className="TypeOfPoke">
-																			<span className={type}>{type}</span>
-																		</div>
-																	))}
-																</div>
+															<div className="TypeOfPokeBox">
+																{traits.types.map((type) => (
+																	<div className="TypeOfPoke">
+																		<span className={type.type.name}>
+																			{type.type.name}
+																		</span>
+																	</div>
+																))}
 															</div>
 														</div>
 													</div>
-												</button>
-											)}
-										</Palette>
-									</div>
-								))
-							)}
+												</div>
+											</button>
+										)}
+									</Palette>
+								</div>
+							))}
 						</div>
 					</div>
 				</section>
