@@ -1,6 +1,7 @@
 import React from "react";
 
 import search from "./icon.svg";
+
 import history from "./history";
 import "./style.css";
 
@@ -28,11 +29,13 @@ class SearchForm extends React.Component {
 		this.setState({ isLoading: true });
 		console.log(this.state.Type);
 		let search = this.state.search.toLowerCase().split(" ").join("");
-		this.getData(`${search}/`);
+		this.getData(`${search}`);
 	};
 
 	getData = async (url) => {
-		await fetch(url)
+		await fetch(
+			`https://cors-anywhere.herokuapp.com/https://pokeapi.glitch.me/v1/pokemon/${url}`
+		)
 			.then((response) => {
 				if (response.ok) {
 					return response.json();
