@@ -5,10 +5,13 @@ import { getPokemon } from "./GetPokemon";
 
 const ListOfTraits = (props) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	let data = props.location.state;
 
 	if (!data.data || data.data.message) {
 =======
+=======
+>>>>>>> parent of 1ab6346... refactoring
 	const [evoImages, setImages] = useState();
 	let data = props.location.state;
 	let maybe = props.location.state;
@@ -33,6 +36,7 @@ const ListOfTraits = (props) => {
 		<div className="container moveRight">
 			<div className="row">
 				<div className="col-md-12">
+<<<<<<< HEAD
 <<<<<<< HEAD
 					{filterData.map((poke) => (
 						<Palette src={poke.sprite} key={poke.number}>
@@ -114,6 +118,8 @@ const ListOfTraits = (props) => {
 							)}
 						</Palette>
 =======
+=======
+>>>>>>> parent of 1ab6346... refactoring
 					{onePoke.map((poke) => (
 						<div key={poke.number}>
 							<p>{poke.description}</p>
