@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import { Palette } from "react-palette";
 import { getPokemon } from "./GetPokemon";
+import history from "./history";
 
 const ListOfTraits = (props) => {
 	let data = props.location.state;
@@ -11,6 +12,11 @@ const ListOfTraits = (props) => {
 	}
 
 	const filterdata = data.data.splice(0, 1);
+
+	const getEvo = async (evo) => {
+		const data = await getPokemon(evo);
+		history.push("/list", { data });
+	};
 
 	return (
 		<div className="container moveRight">
@@ -85,7 +91,7 @@ const ListOfTraits = (props) => {
 											{poke.family.evolutionLine.map((evo) => (
 												<button
 													className="btn btn-light"
-													onClick={() => getPokemon(evo)}
+													onClick={() => getEvo(evo)}
 												>
 													{evo}
 												</button>

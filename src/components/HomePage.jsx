@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { loadData } from "./utils";
+
+import history from "./history";
 import { Palette } from "react-palette";
 import "./style.css";
 
@@ -17,7 +18,7 @@ class HomePage extends Component {
 	async componentDidMount() {
 		const pokeholder = [];
 		for (let i = 0; i < 3; i++) {
-			let getData = await loadData(`${this.getRandomInt()}`);
+			let getData = await getPokemon(`${this.getRandomInt()}`);
 			if (getData.length > 1) {
 				let getDataOne = getData.splice(1, 1);
 				pokeholder.push(getDataOne);
@@ -29,6 +30,11 @@ class HomePage extends Component {
 			});
 		}
 	}
+
+	FetchPokemon = async (url) => {
+		const data = await getPokemon(url);
+		history.push("/list", { data });
+	};
 
 	render() {
 		const { pokemon } = this.state;
@@ -57,7 +63,7 @@ class HomePage extends Component {
 											{({ data, loading, error }) => (
 												<button
 													className="HomePage_btn"
-													onClick={() => getPokemon(traits.name)}
+													onClick={() => this.FetchPokemon(traits.name)}
 													key={uuid()}
 												>
 													<div

@@ -1,20 +1,16 @@
 import React from "react";
 
 import search from "./icon.svg";
-
 import history from "./history";
 import "./style.css";
 
+import { getPokemon } from "./GetPokemon";
+
 class SearchForm extends React.Component {
-	view = " ";
 	state = {
 		search: " ",
 		searchData: [],
 		Type: "pokemon",
-		isLoading: false,
-		error: null,
-		view: null,
-		anError: null,
 	};
 
 	handleChange = (e) => {
@@ -24,28 +20,11 @@ class SearchForm extends React.Component {
 	};
 
 	handleSubmit = async (e) => {
-		console.log(history);
 		e.preventDefault();
-		this.setState({ isLoading: true });
 		console.log(this.state.Type);
-		let search = this.state.search.toLowerCase().split(" ").join("");
-		this.getData(`${search}`);
-	};
-
-	getData = async (url) => {
-		await fetch(
-			`https://cors-anywhere.herokuapp.com/https://pokeapi.glitch.me/v1/pokemon/${url}`
-		)
-			.then((response) => {
-				if (response.ok) {
-					return response.json();
-				}
-			})
-
-			.then((data) => history.push("/list", { data }))
-
-			.then((data) => this.setState({ searchData: data, isLoading: false }))
-			.catch((error) => this.setState({ error, isLoading: false }));
+		let url = this.state.search.toLowerCase().split(" ").join("");
+		const data = await getPokemon(url);
+		history.push("/list", { data });
 	};
 
 	render() {
@@ -62,7 +41,6 @@ class SearchForm extends React.Component {
 							value={this.state.search}
 							onChange={this.handleChange}
 							name="search"
-							placeholder="Search for a Pokémon"
 						/>
 					</label>
 					<button type="submit" value="Submit" className="searchBox_btn">
