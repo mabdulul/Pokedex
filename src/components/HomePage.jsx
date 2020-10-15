@@ -41,8 +41,8 @@ class HomePage extends Component {
 
 		return (
 			<>
-				<section>
-					<div className="container" style={{ marginTop: "5%" }}>
+				<section key={uuid()}>
+					<div className="container" style={{ marginTop: "5%" }} key={uuid()}>
 						<div className="row HomePage">
 							<div className="col-md-12 homepage_header">
 								<div className="homepage_header">
@@ -52,14 +52,14 @@ class HomePage extends Component {
 								</div>
 							</div>
 						</div>
-						<div className="row">
+						<div className="row" key={uuid()}>
 							{pokemon.map((drilldown) =>
 								drilldown.map((traits) => (
 									<div
 										className="col-sm-12 col-md-11 col-lg-4 homepage_topThree"
 										key={uuid()}
 									>
-										<Palette src={traits.sprite}>
+										<Palette src={traits.sprite} key={uuid()}>
 											{({ data, loading, error }) => (
 												<button
 													className="HomePage_btn"
@@ -81,15 +81,16 @@ class HomePage extends Component {
 																alt={traits.name}
 																className="img-responsive"
 																width="195px"
+																key={uuid()}
 															/>
 														</div>
 
-														<div>
-															<h4 className="PokeNameHome">{traits.name} </h4>
-															<div>
-																<div className="TypeOfPokeBox">
+														<div key={uuid()}>
+															<h4 className="PokeNameHome">{traits.name}</h4>
+															<div key={uuid()}>
+																<div className="TypeOfPokeBox" key={uuid()}>
 																	{traits.types.map((type) => (
-																		<div className="TypeOfPoke">
+																		<div className="TypeOfPoke" key={uuid()}>
 																			<span className={type}>{type}</span>
 																		</div>
 																	))}
