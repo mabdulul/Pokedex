@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./style.css";
 import { Palette } from "react-palette";
 import { getPokemon } from "./GetPokemon";
