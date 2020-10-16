@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import { Palette } from "react-palette";
 import { getPokemon } from "./GetPokemon";
@@ -6,12 +6,20 @@ import history from "./history";
 
 const ListOfTraits = (props) => {
 	let data = props.location.state;
+	const [loading, setLoading] = useState(true);
+	const [filterdata, setfilterdata] = useState([]);
+
+	useEffect(() => {
+		setLoading(true);
+		setfilterdata(data.data.splice(0, 1));
+		setLoading(false);
+	}, [data.data]);
 
 	if (!data.data || data.data.message) {
 		return <h1>The pokemon does not exist </h1>;
 	}
 
-	const filterdata = data.data.splice(0, 1);
+	if (loading) return "Loading";
 
 	const getEvo = async (evo) => {
 		const data = await getPokemon(evo);
