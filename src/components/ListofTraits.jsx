@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import { Palette } from "react-palette";
 import { getPokemon } from "./GetPokemon";
@@ -89,12 +89,18 @@ const ListOfTraits = (props) => {
 										<div className="Poke_btn">
 											<p>Evolutions</p>
 											{poke.family.evolutionLine.map((evo) => (
-												<button
-													className="btn btn-light"
-													onClick={() => getEvo(evo)}
-												>
-													{evo}
-												</button>
+												<>
+													{evo.split("/").map((evo) => (
+														<>
+															<button
+																className="btn btn-light"
+																onClick={() => getEvo(evo)}
+															>
+																{evo}
+															</button>
+														</>
+													))}
+												</>
 											))}
 										</div>
 									</div>

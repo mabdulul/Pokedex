@@ -10,20 +10,30 @@ import { getPokemon } from "./GetPokemon";
 class HomePage extends Component {
 	state = {
 		pokemon: [],
+		loading: true,
 	};
 	getRandomInt = () => {
 		let num = Math.floor(Math.random() * Math.floor(800));
 		return num;
 	};
 	async componentDidMount() {
+		this.setState({
+			loading: true,
+		});
 		const pokeholder = [];
 		for (let i = 0; i < 3; i++) {
 			let getData = await getPokemon(`${this.getRandomInt()}`);
 			if (getData.length > 1) {
 				let getDataOne = getData.splice(1, 1);
 				pokeholder.push(getDataOne);
+				this.setState({
+					loading: false,
+				});
 			} else {
 				pokeholder.push(getData);
+				this.setState({
+					loading: false,
+				});
 			}
 			this.setState({
 				pokemon: pokeholder,
@@ -38,6 +48,11 @@ class HomePage extends Component {
 
 	render() {
 		const { pokemon } = this.state;
+		const { loading } = this.state;
+
+		if (loading) return "Loading";
+
+		console.log(pokemon);
 
 		return (
 			<>
@@ -77,7 +92,11 @@ class HomePage extends Component {
 															style={{ position: "relative", bottom: "50px" }}
 														>
 															<img
-																src={traits.sprite}
+																src={
+																	traits.sprite
+																		? traits.sprite
+																		: "https://via.placeholder.com/150"
+																}
 																alt={traits.name}
 																className="img-responsive"
 																width="195px"
