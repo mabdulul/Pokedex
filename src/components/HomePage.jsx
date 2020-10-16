@@ -43,6 +43,7 @@ class HomePage extends Component {
 
 	FetchPokemon = async (url) => {
 		const data = await getPokemon(url);
+
 		history.push("/list", { data });
 	};
 
@@ -51,8 +52,6 @@ class HomePage extends Component {
 		const { loading } = this.state;
 
 		if (loading) return "Loading";
-
-		console.log(pokemon);
 
 		return (
 			<>

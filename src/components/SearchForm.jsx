@@ -24,6 +24,7 @@ class SearchForm extends React.Component {
 		console.log(this.state.Type);
 		let url = this.state.search.toLowerCase().split(" ").join("");
 		const data = await getPokemon(url);
+		console.log(data);
 		history.push("/list", { data });
 	};
 

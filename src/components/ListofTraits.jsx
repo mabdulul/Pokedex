@@ -8,18 +8,24 @@ const ListOfTraits = (props) => {
 	let data = props.location.state;
 	const [loading, setLoading] = useState(true);
 	const [filterdata, setfilterdata] = useState([]);
+	const [doesnotExist, setdoesnotExist] = useState(false);
 
 	useEffect(() => {
 		setLoading(true);
-		setfilterdata(data.data.splice(0, 1));
-		setLoading(false);
-	}, [data.data]);
+		setdoesnotExist(false);
+		if (data.data.error === 404) {
+			setdoesnotExist(true);
+		} else {
+			console.log(data);
+			setfilterdata(data.data.splice(0, 1));
+			setLoading(false);
+		}
+	}, [data]);
 
-	if (!data.data || data.data.message) {
-		return <h1>The pokemon does not exist </h1>;
-	}
-
+	if (!!doesnotExist) return "The pokemon does not exist ";
 	if (loading) return "Loading";
+
+	console.log("The loading thing ", doesnotExist);
 
 	const getEvo = async (evo) => {
 		const data = await getPokemon(evo);
