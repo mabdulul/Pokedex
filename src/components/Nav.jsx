@@ -38,7 +38,7 @@ const Nav = (props) => {
 					<SearchForm />
 				</div>
 			</nav>
-			<Route path="/list" exact component={ListOfTraits} />
+			<Route path="/list/:url" exact component={ListOfTraits} />
 			<Route path="/" exact component={HomePage} />
 		</>
 	);

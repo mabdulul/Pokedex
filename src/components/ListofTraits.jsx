@@ -5,7 +5,8 @@ import { getPokemon } from "./GetPokemon";
 import history from "./history";
 
 const ListOfTraits = (props) => {
-	let data = props.location.state;
+	let url = props.match.params.url;
+	console.log(url);
 	const [loading, setLoading] = useState(true);
 	const [filterdata, setfilterdata] = useState([]);
 	const [doesnotExist, setdoesnotExist] = useState(false);
@@ -13,22 +14,23 @@ const ListOfTraits = (props) => {
 	useEffect(() => {
 		setLoading(true);
 		setdoesnotExist(false);
-		if (data.data.error === 404) {
-			setdoesnotExist(true);
-		} else {
-			console.log(data);
-			setfilterdata(data.data.splice(0, 1));
-			setLoading(false);
-		}
-	}, [data]);
+
+		const getData = async () => {
+			await getPokemon(url)
+				.then((data) => {
+					setfilterdata(data.splice(0, 1));
+					setLoading(false);
+				})
+				.catch((error) => {
+					console.error("Error:", error);
+					setdoesnotExist(true);
+				});
+		};
+		getData();
+	}, [url]);
 
 	if (!!doesnotExist) return "The pokemon does not exist ";
 	if (loading) return "Loading";
-
-	const getEvo = async (evo) => {
-		const data = await getPokemon(evo);
-		history.push("/list", { data });
-	};
 
 	return (
 		<div className="container moveRight">
@@ -100,13 +102,13 @@ const ListOfTraits = (props) => {
 										</div>
 										<div className="Poke_btn">
 											<p>Evolutions</p>
-											{poke.family.evolutionLine.map((evo) => (
+											{poke.family.evolutionLine.map((url) => (
 												<>
-													{evo.split("/").map((evo) => (
+													{url.split("/").map((evo) => (
 														<>
 															<button
 																className="btn btn-light"
-																onClick={() => getEvo(evo)}
+																onClick={() => history.push(`/list/${url}`)}
 															>
 																{evo}
 															</button>

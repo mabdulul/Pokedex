@@ -41,12 +41,6 @@ class HomePage extends Component {
 		}
 	}
 
-	FetchPokemon = async (url) => {
-		const data = await getPokemon(url);
-
-		history.push("/list", { data });
-	};
-
 	render() {
 		const { pokemon } = this.state;
 		const { loading } = this.state;
@@ -77,7 +71,7 @@ class HomePage extends Component {
 											{({ data, loading, error }) => (
 												<button
 													className="HomePage_btn"
-													onClick={() => this.FetchPokemon(traits.name)}
+													onClick={() => history.push(`/list/${traits.name}`)}
 													key={uuid()}
 												>
 													<div

@@ -26,6 +26,7 @@ class SearchForm extends React.Component {
 		const data = await getPokemon(url);
 		console.log(data);
 		history.push("/list", { data });
+		history.push(`/list/${url}`);
 	};
 
 	render() {
