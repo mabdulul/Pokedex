@@ -71,7 +71,7 @@ class HomePage extends Component {
 											{({ data, loading, error }) => (
 												<button
 													className="HomePage_btn"
-													onClick={() => history.push(`/list/${traits.name}`)}
+													onClick={() => history.push(`/list/${traits.number}`)}
 													key={uuid()}
 												>
 													<div
