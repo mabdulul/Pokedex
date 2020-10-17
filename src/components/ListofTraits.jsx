@@ -108,7 +108,7 @@ const ListOfTraits = (props) => {
 														<>
 															<button
 																className="btn btn-light"
-																onClick={() => history.push(`/list/${url}`)}
+																onClick={() => history.push(`/list/${evo}`)}
 															>
 																{evo}
 															</button>
