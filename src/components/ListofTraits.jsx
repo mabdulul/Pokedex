@@ -25,8 +25,6 @@ const ListOfTraits = (props) => {
 	if (!!doesnotExist) return "The pokemon does not exist ";
 	if (loading) return "Loading";
 
-	console.log("The loading thing ", doesnotExist);
-
 	const getEvo = async (evo) => {
 		const data = await getPokemon(evo);
 		history.push("/list", { data });
